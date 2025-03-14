@@ -2,7 +2,9 @@
 
 WebStyle Helper es una herramienta sencilla para generar estilos CSS sin esfuerzo. 
 Solo elige colores, fuentes y efectos, y copia el código CSS con un clic. 
-¡Ideal para diseñadores y desarrolladores web que quieren rapidez y simplicidad!  
+¡Ideal para diseñadores y desarrolladores web que quieren rapidez y simplicidad! 
+
+https://t.me/WwwebStylebot
 
 ## 🚀 Características  
 
