@@ -1,45 +1,46 @@
-# 🎨 WebStyle Helper  
+# 🤖 Web Design Bot – Crea páginas web fácilmente  
 
-WebStyle Helper es una herramienta sencilla para generar estilos CSS sin esfuerzo. 
-Solo elige colores, fuentes y efectos, y copia el código CSS con un clic. 
-¡Ideal para diseñadores y desarrolladores web que quieren rapidez y simplicidad! 
+**Web Design Bot** es un asistente para Telegram que te ayuda a generar plantillas de páginas web en pocos pasos.  
+Solo responde algunas preguntas y recibirás un código **HTML y CSS** limpio, siguiendo buenas prácticas.  
+Ideal para quienes necesitan una base rápida y estructurada para su proyecto web.  
 
-https://t.me/WwwebStylebot
+[🔗 Prueba el bot aquí](https://t.me/WwwebStylebot) 
+
+---
 
 ## 🚀 Características  
 
-✅ **Selector de colores**: Define colores para fondo, texto y botones.  
-✅ **Fuentes personalizadas**: Elige entre varias tipografías para tu proyecto.  
-✅ **Efectos básicos**: Sombra, bordes redondeados y transparencias.  
-✅ **Generación automática de CSS**: Copia el código sin necesidad de escribirlo manualmente.  
-✅ **Interfaz minimalista**: Fácil de usar, sin distracciones.  
+✅ **Elige el tipo de web**: Corporativa, blog, tienda online, portafolio y más.  
+✅ **Personalización**: Define colores, estilos y estructura (header, body, footer).  
+✅ **Código optimizado**: HTML y CSS con metodología BEM y especificidad 010.  
+✅ **Interfaz conversacional**: Fácil de usar dentro de Telegram.  
+
+---
 
 ## 🛠️ Cómo usar  
 
-1. Abre la aplicación en tu navegador.  
-2. Selecciona los colores, fuentes y efectos que prefieras.  
-3. Haz clic en "Generar CSS".  
-4. Copia el código y pégalo en tu proyecto web.  
+1️⃣ **Inicia el bot** con `/start`.  
+2️⃣ **Responde las preguntas** sobre el tipo de página, colores y estructura.  
+3️⃣ **Recibe tu código HTML y CSS** listo para copiar y pegar.  
+
+---
 
 ## 📂 Estructura del Proyecto  
+│── /docs → Contiene preguntas.pdf y Sketch_Idea.pdf 📄
+│── bot_Telegram.py → Código principal del bot
+│── README.md → Documentación del proyecto
 
-```
-/webstyle-helper  
-│── /css → Estilos de la app  
-│── /js → Código JavaScript  
-│── /assets → Imágenes y fuentes  
-│── index.html → Página principal  
-│── script.js → Lógica de la app  
-│── styles.css → Estilos generales  
-│── README.md → Este archivo  
-```
+---
 
 ## 🔧 Tecnologías utilizadas  
 
-- **HTML** → Para la estructura de la página.  
-- **CSS** → Para el diseño y efectos visuales.  
-- **JavaScript** → Para la lógica interactiva (selección de estilos y generación de código).  
+- **Python** → Lógica del bot.  
+- **python-telegram-bot** → Para la integración con Telegram.  
+- **PlantUML** → Para diagramas de planificación.  
+- **HTML & CSS** → Generación de código estructurado con buenas prácticas.  
+
+---
 
 ## 📜 Licencia  
 
-Este proyecto es Open Source.  
+Este proyecto es Open Source, por lo que puedes usarlo y modificarlo libremente.  
