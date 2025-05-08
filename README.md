@@ -7,6 +7,15 @@ The main idea is to make web design accessible to individuals and small business
 
 With **WebStyle 2.0** (an improved version over the previous one), the goal is to demonstrate that it is possible to create a creative project without spending a lot of money or resources.
 
+---
+
+**Testing**
+This is a test video of the WebStyle 2.0 Bot.  
+Testing how the bot works and interacts with users. 🤖
+
+[Click here to watch the video](https://youtube.com/shorts/-2ieAw50lt0?si=8IMCIAz99Tkp_-wW)
+
+**⬇️**
 [🔗 Try the bot here](https://t.me/WwwebStylebot)
 
 ---
