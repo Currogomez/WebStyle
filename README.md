@@ -1,71 +1,106 @@
-# 🤖 Web Design Bot – Crea páginas web fácilmente  
+# 🤖 Web Design Bot – Create Websites Easily
 
-WebStyle 2.0 es un bot adaptado a la App Telegram de código abierto, que utiliza inteligencia artificial para ofrecer asistencia en tiempo real en el diseño web básico (HTML, CSS y un tanto de JavaScript sencillo).
+**WebStyle 2.0** is an open-source bot for the Telegram app that uses artificial intelligence to provide real-time assistance in basic web design (HTML, CSS, and some simple JavaScript).
 
-El bot interactúa con los usuarios mediante el chat de Telegram, explicando paso a paso para crear una página web personalizada.
-La Idea principal es facilitar el acceso al diseño web a particulares y pequeñas empresas, sin necesidad de amplios conocimientos de programación ni herramientas de pago.
+The bot interacts with users through the Telegram chat, guiding them step by step to create a personalized website.  
+The main idea is to make web design accessible to individuals and small businesses without the need for advanced programming knowledge or expensive tools.
 
-Con WebStyle 2.0 (versión mejorada con respecto a la anterior) quiero dar visibilidad a que es posible realizar un proyecto creativo sin necesidad de gastar mucho dinero ni recursos.
+With **WebStyle 2.0** (an improved version over the previous one), the goal is to demonstrate that it is possible to create a creative project without spending a lot of money or resources.
 
-[🔗 Prueba el bot aquí](https://t.me/WwwebStylebot) 
+[🔗 Try the bot here](https://t.me/WwwebStylebot)
 
-——————————————————————————————————————————
+---
 
-## 🚀 Características  
+## 🚀 Features
 
-Funciones Principales:
+### Key Features:
 
-	1.	Preguntas Interactivas
-	•	Tipo de web (corporativa, blog, tienda online, portfolio, educativa, newsletter, etc.)
-	•	Color primario
-	•	Color secundario
-	•	Color terciario
-	•	Estilo visual (minimalista, moderno, clásico, creativo o libre)
-	•	Disposición (one-page, secciones navegables, grid de tarjetas, menú lateral, otros…)
-    ----------
-	2.	Sugerencias Inteligentes a partir de la IA implementada
-	•	Plantillas HTML/CSS predefinidas adaptadas a las respuestas del usuario.
-	•	Inyección automática de paleta de colores y estilo en la plantilla a un CSS.
-	•	Planteamiento creativo/ideas, sobre su Web a elaborar.
-    •	Contenido Principal/esencial necesario para el tipo de Web a elaborar.
-    ----------
-	3.	Asistencia en Tiempo Real
-	•	El usuario puede hacer preguntas en el chat y recibir fragmentos de código para copiar y pegar en su web.
-	•	Consejos básicos de JavaScript cuando (por ejemplo, añadir un botón interactivo si es necesario).
-    ----------
-	4.	Fácil de Usar
-	•	No requiere instalación más allá de contar con la App/Web: Telegram.
-	•	Uso de comandos (/start), para comenzar el bot y botones inline para que incluso usuarios sin experiencia técnica naveguen en el bot correctamente.
-    ----------
-	5.	Código Abierto y Gratuito
-	•	Licencia MIT, para que la comunidad pueda revisar, aprender, contribuir y extender el proyecto.
+1. **Interactive Questions**
+    - Type of website (corporate, blog, online store, portfolio, educational, newsletter, etc.)
+    - Primary color
+    - Secondary color
+    - Tertiary color
+    - Visual style (minimalistic, modern, classic, creative, or free)
+    - Layout (one-page, navigable sections, grid of cards, sidebar menu, others…)
 
-——————————————————————————————————————————
+2. **Smart Suggestions from the AI Implementation**
+    - Predefined HTML/CSS templates adapted to the user's answers.
+    - Automatic injection of color palette and style into a CSS file.
+    - Creative ideas and suggestions for the website to be developed.
+    - Essential content required for the specific type of website.
 
-## 🛠️ Cómo usar  
+3. **Real-Time Assistance**
+    - Users can ask questions in the chat and receive code snippets to copy and paste into their website.
+    - Basic JavaScript tips when necessary (e.g., adding an interactive button).
 
-1️⃣ **Inicia el bot** con `/start`.  
-2️⃣ **Responde las preguntas** sobre el tipo de página, colores y estructura.  
-3️⃣ **Recibe tu código HTML y CSS** listo para copiar y pegar.  
+4. **Easy to Use**
+    - No installation required beyond having the Telegram app/web.
+    - Use `/start` command to begin the bot and inline buttons so that even non-technical users can navigate easily.
 
-——————————————————————————————————————————
+5. **Open Source and Free**
+    - MIT License, allowing the community to review, learn, contribute, and extend the project.
 
-## 📂 Estructura del Proyecto  
-│── /docs → Contiene preguntas.pdf y Sketch_Idea.pdf 📄
-│── bot_Telegram.py → Código principal del bot
-│── README.md → Documentación del proyecto
+---
 
-——————————————————————————————————————————
+## 🛠️ How to Use
 
-## 🔧 Tecnologías utilizadas  
+1. **Start the bot** with `/start`.
+2. **Answer questions** about the type of page, colors, and structure.
+3. **Receive your ready-to-use HTML, CSS and Java code** to copy and paste.
 
-- **Python** → Lógica del bot.  
-- **python-telegram-bot** → Para la integración con Telegram.  
-- **PlantUML** → Para diagramas de planificación.  
-- **HTML & CSS** → Generación de código estructurado con buenas prácticas.  
+---
 
-——————————————————————————————————————————
+## 📂 Project Structure
+│── /docs → Contains questions.pdf and Sketch_Idea.pdf 📄
+│── bot_Telegram.py → Main bot code
+│── README.md → Project documentation
+│──CONTRIBUTING_WebStyle.md → Contribution guidelines for WebStyle.
+│──Wiki_and_Devlog_WebStyle.md → Developer documentation and project devlog.
 
-## 📜 Licencia  
+---
 
-Este proyecto es Open Source, por lo que puedes usarlo y modificarlo libremente.  
+## 🔧 Technologies Used
+
+- **Python** → Logic of the bot.
+- **python-telegram-bot** → For Telegram integration.
+- **PlantUML** → For planning diagrams.
+- **HTML, CSS and a little bit of JS** → Generation of well-structured code with best practices.
+
+---
+
+## 🌐 Online Demo
+
+The **WebStyle 2.0** bot is available on Telegram. It can be accessed directly via the Telegram web or mobile app.
+
+- **No installation required** except for having the Telegram app on your device or accessing Telegram via the web at [https://web.telegram.org](https://web.telegram.org).
+- Simply interact with the bot by typing `/start`, answering a few questions about your website preferences, and receiving a fully generated HTML and CSS template with JavaScript functionalities for you to use.
+
+This bot is **not hosted as a web demo** outside of Telegram because its primary function is to be accessible within the **Telegram ecosystem**. The goal is to provide a **simple and accessible web design experience** directly through the app, without the need for setting up additional web hosting or platform accounts.
+
+For a **seamless experience**, simply use the bot on your Telegram app or through the [Telegram web interface](https://web.telegram.org).
+
+---
+
+## 📜 License
+
+**MIT License**
+
+Copyright (c) [2025] [Francisco Castro Gomez]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
