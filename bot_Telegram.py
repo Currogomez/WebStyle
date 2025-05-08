@@ -1,193 +1,132 @@
-import logging
-from telegram import Update, ReplyKeyboardMarkup
-from telegram.ext import (
-    Application, CommandHandler, MessageHandler, ConversationHandler, filters, ContextTypes
-)
+"""
+WebStyle 2.0 – Bot de Telegram con IA (OpenRouter)
+Usando python-telegram-bot v20+, python-dotenv y OpenRouter para generar plantillas HTML/CSS.
+"""
 
-# Configuración de logging
+import os, html, logging
+from dotenv import load_dotenv
+from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, ContextTypes, filters
+import openai
+
+# — Seguridad: carga variables de entorno —
+load_dotenv()
+TOKEN = os.getenv("TELEGRAM_TOKEN")
+# Clave de OpenRouter
+OPENAI_KEY = "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"
+
+if not TOKEN:
+    raise RuntimeError("Define TELEGRAM_TOKEN en .env")
+
+# — Configura OpenRouter —
+openai.api_key = OPENAI_KEY
+openai.api_base = "https://openrouter.ai/api/v1"
+openai.api_type = "openai"
+openai.api_version = "v1"
+
+# — Logging —
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO
 )
 
-# Token del bot de Telegram
-TOKEN = "8090158396:AAExpLkd9aTgYkJtTuMXQ5GtxqfMjKB5_QM"
+# — Estados de la conversación —
+TYPE, COLOR1, COLOR2, COLOR3, STYLE, LAYOUT = range(6)
 
-# Estados de la conversación
-WEB_TYPE, COLORS, STYLE, DETAILS, HEADER, BODY, FOOTER = range(7)
-
-# Opciones de teclado
-WEB_OPTIONS = [
+# — Teclado de opciones para tipo de web —
+TYPE_KEYBOARD = [
     ["Corporativa", "Empresarial"],
-    ["Tienda Online", "Newsletter"],
+    ["Tienda online", "Newsletter"],
     ["Portafolio", "Educativa"],
     ["Blog"]
 ]
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = ReplyKeyboardMarkup(WEB_OPTIONS, resize_keyboard=True)
+# — Handlers —
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    kb = ReplyKeyboardMarkup(TYPE_KEYBOARD, one_time_keyboard=True, resize_keyboard=True)
     await update.message.reply_text(
-        "👋 ¡Hola! ¿Qué tipo de página quieres crear? 🌍✨",
-        reply_markup=keyboard
+        "👋 ¡Bienvenido a WebStyle 2.0 con IA!\n¿Qué tipo de página web deseas crear?", reply_markup=kb
     )
-    return WEB_TYPE
+    return TYPE
 
-async def handle_website_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["web_type"] = update.message.text
-    await update.message.reply_text("🎨 Dime los colores principales (Ejemplo: Azul y blanco).")
-    return COLORS
+async def type_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["type"] = html.escape(update.message.text)
+    await update.message.reply_text("¿Color primario? (hex o nombre)", reply_markup=ReplyKeyboardRemove())
+    return COLOR1
 
-async def handle_colors(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["colors"] = update.message.text
-    await update.message.reply_text("✨ Ahora dime un estilo de diseño (Minimalista, Moderno, Clásico).")
+async def color1_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["color1"] = html.escape(update.message.text)
+    await update.message.reply_text("¿Color secundario?")
+    return COLOR2
+
+async def color2_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["color2"] = html.escape(update.message.text)
+    await update.message.reply_text("¿Color terciario?")
+    return COLOR3
+
+async def color3_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["color3"] = html.escape(update.message.text)
+    await update.message.reply_text(
+        "¿Estilo visual? (minimalista, moderno, clásico, creativo o libre)"
+    )
     return STYLE
 
-async def handle_style(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["style"] = update.message.text
-    await update.message.reply_text("🔍 Cuéntame más detalles sobre la página.")
-    return DETAILS
-
-async def handle_details(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["details"] = update.message.text
-    await update.message.reply_text("🖥️ ¿Cómo quieres que sea el Header?")
-    return HEADER
-
-async def handle_header(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["header"] = update.message.text
-    await update.message.reply_text("📜 ¿Cómo quieres que sea el Body?")
-    return BODY
-
-async def handle_body(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["body"] = update.message.text
-    await update.message.reply_text("📌 ¿Cómo quieres que sea el Footer?")
-    return FOOTER
-
-async def handle_footer(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data["footer"] = update.message.text
-
-    # Recopilando toda la información para generar la respuesta
-    web_type = context.user_data.get("web_type", "No especificado")
-    colors = context.user_data.get("colors", "No especificado")
-    style = context.user_data.get("style", "No especificado")
-    details = context.user_data.get("details", "No especificado")
-    header = context.user_data.get("header", "No especificado")
-    body = context.user_data.get("body", "No especificado")
-    footer = context.user_data.get("footer", "No especificado")
-
-    # Resumen de la web
-    summary = (
-        f"📜 **Resumen de tu página web:**\n"
-        f"🔹 **Tipo de web:** {web_type}\n"
-        f"🎨 **Colores principales:** {colors}\n"
-        f"🖌 **Estilo de diseño:** {style}\n"
-        f"🔍 **Detalles adicionales:** {details}\n"
-        f"📌 **Header:** {header}\n"
-        f"📜 **Body:** {body}\n"
-        f"📎 **Footer:** {footer}\n\n"
-        "🚀 **Generando tu diseño web basado en buenas prácticas...**"
+async def style_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["style"] = html.escape(update.message.text)
+    await update.message.reply_text(
+        "¿Layout? (one-page, secciones navegables, grid, menú lateral u otro)"
     )
+    return LAYOUT
 
-    # Código HTML con estructura estricta
-    html_code = f"""```html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{web_type}</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <section class="page">
-        <header class="page__header">
-            <h1>{header}</h1>
-        </header>
-        <article class="page__content">
-            <div class="page__info">
-                <p>{body}</p>
-            </div>
-        </article>
-        <footer class="page__footer">
-            <p>{footer}</p>
-        </footer>
-    </section>
-</body>
-</html>
-```"""
-
-    # Código CSS usando BEM con especificidad 010
-    css_code = """```css
-/* Estilos basados en BEM con especificidad 010 */
-.page {
-    font-family: Arial, sans-serif;
-    color: #333;
-    background-color: #f9f9f9;
-    padding: 20px;
-}
-
-.page__header {
-    background-color: #007BFF;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.page__content {
-    background-color: white;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.page__info {
-    font-size: 1.2em;
-    line-height: 1.5;
-}
-
-.page__footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 15px;
-}
-```"""
-
-    # Enviar respuestas al usuario
-    await update.message.reply_text(summary)
-    await update.message.reply_text("📜 **Aquí tienes tu plantilla HTML:**\n" + html_code)
-    await update.message.reply_text("🎨 **Aquí tienes tu plantilla CSS:**\n" + css_code)
-
+async def layout_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    context.user_data["layout"] = html.escape(update.message.text)
+    await update.message.reply_text("Generando tu plantilla con IA… ⏳")
+    html_content = generate_html(context.user_data)
+    filename = "webstyle_template.html"
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    await update.message.reply_document(open(filename, "rb"), caption="¡Tu web está lista!")
     return ConversationHandler.END
 
-async def fallback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("⚠️ No entendí eso. Intenta de nuevo. 😅")
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    await update.message.reply_text(
+        "Operación cancelada. Usa /start para reiniciar.", reply_markup=ReplyKeyboardRemove()
+    )
     return ConversationHandler.END
 
-async def test(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("El comando /test funciona correctamente.")
+# — Función de IA con OpenRouter —
+def generate_html(data: dict) -> str:
+    prompt = (
+        f"Genera un HTML completo para un sitio '{data['type']}' "
+        f"con colores primaria '{data['color1']}', secundaria '{data['color2']}', terciaria '{data['color3']}', "
+        f"estilo '{data['style']}', layout '{data['layout']}'. "
+        "Incluye header, navegación, secciones de ejemplo y footer, con CSS limpio y accesible."
+    )
+    response = openai.ChatCompletion.create(
+        model="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",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.7,
+        max_tokens=1500
+    )
+    return response.choices[0].message.content
 
+# — Configuración de la aplicación —
 def main():
     app = Application.builder().token(TOKEN).build()
-
-    conv_handler = ConversationHandler(
+    conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
-            WEB_TYPE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_website_type)],
-            COLORS: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_colors)],
-            STYLE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_style)],
-            DETAILS: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_details)],
-            HEADER: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_header)],
-            BODY: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_body)],
-            FOOTER: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_footer)],
+            TYPE:    [MessageHandler(filters.TEXT & ~filters.COMMAND, type_handler)],
+            COLOR1:  [MessageHandler(filters.TEXT & ~filters.COMMAND, color1_handler)],
+            COLOR2:  [MessageHandler(filters.TEXT & ~filters.COMMAND, color2_handler)],
+            COLOR3:  [MessageHandler(filters.TEXT & ~filters.COMMAND, color3_handler)],
+            STYLE:   [MessageHandler(filters.TEXT & ~filters.COMMAND, style_handler)],
+            LAYOUT:  [MessageHandler(filters.TEXT & ~filters.COMMAND, layout_handler)],
         },
-        fallbacks=[MessageHandler(filters.ALL, fallback)],
-        conversation_timeout=600,  # Expira en 10 minutos
+        fallbacks=[CommandHandler("cancel", cancel)],
     )
-
-    app.add_handler(conv_handler)
-    app.add_handler(CommandHandler("test", test))
-
-    logging.info("✅ Bot en ejecución...")
+    app.add_handler(conv)
+    logging.info("Bot iniciado en MacBook – esperando mensajes…")
     app.run_polling()
 
 if __name__ == "__main__":
