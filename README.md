@@ -183,6 +183,6 @@ Open Telegram, search for your bot, and type `/start` or any other command youâ€
 ## ðŸ§© Notes.
 
 - Use `python3` and `pip3` if you're on Mac and face issues with `python`.
-- To keep your bot running 24/7, consider using `screen`, `tmux`, or deploying it to a cloud server.
+- To keep your bot running 24/7, consider using `screen`, `tmux`, or deploying it to a cloud server, which is paid, although you will not have to pay much amount.
 
 ---
