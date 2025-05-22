@@ -113,3 +113,76 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+# 🧠 How to Launch Locally WebStyle Bot.
+
+---
+⬇️⬇️⬇️
+---
+
+### 1. Clone the repository.
+
+```bash
+git clone https://github.com/Currogomez/WebStyle.git
+cd WebStyle
+```
+
+---
+
+### 2. Create and activate a virtual environment.
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Mac/Linux
+# .\venv\Scripts\activate  # On Windows
+```
+
+---
+
+### 3. Install the required dependencies.
+
+```bash
+pip install -r requirements.txt
+```
+
+> If `requirements.txt` is missing, generate it with `pip freeze > requirements.txt` after installing your packages.
+
+---
+
+### 4. Create a `.env` file.
+
+Create a `.env` file in the root directory with the following content:
+
+```env
+TELEGRAM_TOKEN=your_telegram_bot_token
+OPENROUTER_API_KEY=your_openrouter_api_key
+```
+
+> Replace the values with your actual Telegram bot token and OpenRouter API key.
+
+---
+
+### 5. Run the bot.
+
+```bash
+python main.py
+```
+
+> If your main file has a different name, replace `main.py` with the correct filename.
+
+---
+
+### 6. Interact with the bot.
+
+Open Telegram, search for your bot, and type `/start` or any other command you’ve set up. The bot should respond accordingly.
+
+---
+
+## 🧩 Notes.
+
+- Use `python3` and `pip3` if you're on Mac and face issues with `python`.
+- To keep your bot running 24/7, consider using `screen`, `tmux`, or deploying it to a cloud server.
+
+---
