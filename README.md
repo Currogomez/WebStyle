@@ -186,3 +186,7 @@ Open Telegram, search for your bot, and type `/start` or any other command youâ€
 - To keep your bot running 24/7, consider using `screen`, `tmux`, or deploying it to a cloud server, which is paid, although you will not have to pay much amount.
 
 ---
+look at my visual presentation! :
+https://view.genially.com/68358aaa683d98e8e5462515/presentation-webstyle
+
+---
